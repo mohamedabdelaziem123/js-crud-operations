@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>bookmark</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&family=Pacifico&family=Righteous&display=swap" rel="stylesheet">
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+			integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+    
+	</head>
+	<body>
+    <div class="alert d-flex justify-content-center align-items-center d-none" id="exitAlert">
+      <div  class="alert-content rounded-2 p-4 z-4">
+        <div class="alert-wrapper">
+          <div class="title d-flex justify-content-between w-100 mb-4">
+            <div class="colors d-flex justify-content-center align-items-center">
+               <div class="rounded-circle me-2 dots bg-danger"></div>
+               <div class="rounded-circle me-2 dots bg-warning"></div>
+               <div class="rounded-circle me-2 dots bg-success"></div>
+            </div>
+            <button onclick="exitAlert()" class="btn border-0 ">
+              <i class="fa-solid fa-xmark close fs-3"></i>
+            </button>
+          </div>
+          <p class="alert-text pb-2 m-0 ">
+            Site Name or Url is not valid, Please follow the rules below :
+          </p>
+          <p class="constrains pt-2 m-0 pt-sans-caption blk">
+            <i class="fa-regular fa-circle-right p-2"></i>
+            Site name must contain at least 3 characters
+          </p>
+          <p class="constrains pt-2 m-0 pt-sans-caption blk">
+            <i class="fa-regular fa-circle-right p-2"></i>
+            Site URL must be a valid one
+          </p>
+
+        </div>
+
+      </div>
+
+    </div> 
+		<div class="container">
+			<div class="row justify-content-center my-5">
+				<h1 class="text-center px50 pacifico position-relative mx-auto p-0">Bookmarker</h1>
+			</div>
+      <div class="row books p-3 py-4 mt-5">
+        <h2 class=" text-center px25 righteous mb-4"> <i class="fa-solid fa-bookmark"></i>
+          Bookmark your favorite sites
+          <i class="fa-solid fa-bookmark"></i>
+         </h2>
+         <div  class="pt-sans-caption  d-flex flex-column justify-content-center align-items-center gap-4">
+         <div class="book d-flex flex-column justify-content-center w-100 ">
+          <label class="pb-2 w700" for="site"><i class="fa-solid fa-book-bookmark pe-2"></i> 
+            Site Name</label>
+          <input onfocus="validation(this)" oninput="validation(this)" id="site" class="form-control" placeholder="Bookmark Name" type="text">
+         </div>
+         <div class="url d-flex flex-column justify-content-center w-100 ">
+          <label class="pb-2 w700" for="url"><i class="fa-solid fa-link pe-2"></i> 
+            Site URL</label>
+          <input onfocus="validation(this)" oninput="validation(this)" id="url" class="form-control" placeholder="Websile URL" type="text">
+         </div>
+         <button onclick="submit()" class="btn btn-danger  px-5" id="submitBtn">Submit</button>
+         <button onclick="update()" class="btn btn-info d-none  px-5" id="ModfiyBtn">Modfiy</button>
+         </div>
+          
+      </div>
+      <div class="row">
+
+        <table class=" text-capitalize mt-4 text-center bg-light pt-sans-caption  ">
+          <thead>
+            <tr>
+              <th class="text-capitalize p-2">index </th>
+            <th  class="text-capitalize p-2">Website Name</th>
+            <th class="text-capitalize p-2">Visit </th>
+            <th class="text-capitalize p-2">update </th>
+            <th class="text-capitalize p-2">delete</th>
+            </tr>
+          </thead>
+          <tbody id="content">
+          </tbody>
+        </table>
+      </div>
+
+		</div>
+    <script src="js/index.js"></script>
+	</body>
+</html>
