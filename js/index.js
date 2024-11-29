@@ -5,9 +5,6 @@ var submitBtn = document.getElementById("submitBtn");
 var ModfiyBtn = document.getElementById("ModfiyBtn");
 var alertBtn = document.getElementById("exitAlert");
 
-console.log(ModfiyBtn)
-console.log(submitBtn)
-
 // localStorage.clear();
 // localStorage.setItem("site","[]");
 var myindex=-1;
@@ -24,8 +21,8 @@ else {
 
 function validation(inputs) {
     regex = {
-        site:/^[\w\-\s]{3,60}$/,
-        url:/^(https?:\/\/)?[a-zA-Z0-9\-]+\.[a-zA-Z]{2,}(\S*)$/  
+        site:/^[\w]{3,50}$/,
+        url:/^(https?:\/\/)?[a-zA-Z0-9\-]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/  
     }
     if (regex[inputs.id].test(inputs.value) == false) {
         inputs.classList.add("is-invalid");
@@ -51,10 +48,20 @@ function showAlert() {
 function submit() {
    
     if (siteNameInput.classList.contains("is-valid") && siteUrlInput.classList.contains("is-valid")) {
+        if (siteUrlInput.value.startsWith("https://") || siteUrlInput.value.startsWith("http://"))
+        {
         saveSite = {
             siteName: siteNameInput.value,
             siteUrl: siteUrlInput.value
+            }
         }
+        else
+        {
+            saveSite = {
+                siteName: siteNameInput.value,
+                siteUrl:"https://"+ siteUrlInput.value
+                }
+            }
         siteAnchor.push(saveSite);
         localStorage.setItem("site", JSON.stringify(siteAnchor));
         display(siteAnchor, 0);
@@ -72,7 +79,7 @@ function display(arr,updateHandler) {
               <td class="p-2" >${i+1}</td>
               <td  class="p-2">${arr[i].siteName}</td>
               <td class="p-2">
-                <a href="https://${arr[i].siteUrl}" class="text-capitalize btn btn-success pe-2" >
+                <a href="${arr[i].siteUrl}" class="text-capitalize btn btn-success pe-2" >
                   <i class="fa-solid fa-eye pe-2"></i>
                  Visit
                 </a>
@@ -130,8 +137,15 @@ function displayUpdate(index, arr) {
 }
 function update() {
     if (siteNameInput.classList.contains("is-valid") && siteUrlInput.classList.contains("is-valid")) {
+        if (siteUrlInput.value.startsWith("https://") || siteUrlInput.value.startsWith("http://")) { 
         siteAnchor[myindex].siteName = siteNameInput.value;
         siteAnchor[myindex].siteUrl = siteUrlInput.value;
+        }
+        else
+        {
+            siteAnchor[myindex].siteName = siteNameInput.value;
+        siteAnchor[myindex].siteUrl = "https://"+siteUrlInput.value;
+        }
         submitBtn.classList.remove("d-none");
         ModfiyBtn.classList.add("d-none");
         localStorage.setItem("site", JSON.stringify(siteAnchor));
@@ -142,18 +156,19 @@ function update() {
         showAlert();
       
     }
-    
-    
-
-    
+  
 }
 
+alertBtn.addEventListener("click", function (e) {
+    if (e.target.id == alertBtn.id) {
+        exitAlert()
+    }
+})
 
+document.addEventListener('scroll', function () {
 
-// for (var i = index; i >= 0; i--){
-//     var temp = {};
-// temp = arr[i - 1];
-// arr[i - 1] = arr[i];
-// arr[i] = temp;
-//     display(arr);
-// }
+    var scrollableHeight = document.documentElement.scrollHeight; 
+    var newHeight =  scrollableHeight;
+    alertBtn.style.height = newHeight + 'px' ;
+  });
+//adjust the alert when scrolling in mobile view
